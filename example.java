@@ -1,35 +1,15 @@
 import josx.platform.rcx.*;
+import lejos.hardware.Sound;
 
-            //////////////////////////////////////
-            /**
-            * Represents a simple sample application.
-            *
-            * @author The leJOS Tutorial
-            * @version 1.0 
-            */
             public class SimpleSample {        
 
-                ////////////////////////////////////////////
-                // public methods
-                ////////////////////////////////////////////
+                public static void main(String[] args) throws InterruptedException {
 
-                ////////////////////////////////////////////
-                /**
-                 * main method 
-                 * @throws InterruptedException
-                 */
-                public static void main(String[] args) 
-                    throws InterruptedException {
-
-                    // message
                     TextLCD.print("DRIVE");
+                    Sound.playSample(java.io.File('./song.wav'));
 
-                    // drive forward
-                    Motor.A.forward();
-
-                    // just run until RUN button is pressed again
                     Button.RUN.waitForPressAndRelease();
 
-                } // main()
+                } 
 
-            } // class SimpleSample
+            } 

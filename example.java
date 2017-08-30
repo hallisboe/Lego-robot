@@ -5,7 +5,7 @@ import lejos.hardware.Sound;
 
                 public static void main(String[] args) throws InterruptedException {
 
-                    TextLCD.print("DRIVE");
+                    TextLCD.print("DARRRRRRUUUUUDE VERDEN!!!!");
                     Sound.playSample(java.io.File('./song.wav'));
 
                     Button.RUN.waitForPressAndRelease();

@@ -1,4 +1,0 @@
-TODO: 
-Smiley i JFrame (Check)
-Arbeidstaker i egen klasse -.-
-Fikse fil, konto oppgave

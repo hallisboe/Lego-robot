@@ -10,6 +10,8 @@ import lejos.hardware.Sound;
 
                     Button.RUN.waitForPressAndRelease();
 
+                    // Dette er en endring
+
                 } 
 
             } 

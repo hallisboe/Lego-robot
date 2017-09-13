@@ -34,47 +34,36 @@ public class Washer {
 
 		while(true){
 			engine.moveForward();
-			while(!checkRGBData()) {
-				if(soundDetected()){
-					engine.stop();
-					sleep(6000);
-					engine.moveForward();
+			while(true) {
+				soundDetected ();
+				if(checkRGBData ()){
+					break;
 				}
 			}
-
 			rotate90Degrees(bigRot);
 		}
-		
-
-		
 	}
 
 	//Checks if the ground is black
 	private boolean isGroundBlack(){
-		int iterations = 0;
-		while(iterations <= 10){
-			float intensity = colorSensor.getData()[0];
-			System.out.print("\nIntensity: " + intensity);
-			if(intensity <= 0.11){
-				return true;
-			}
-			iterations++;
+		float intensity = colorSensor.getData()[0];
+		System.out.print("\nIntensity: " + intensity);
+		if(intensity <= 0.11){
+			return true;
 		}
 		return false;
 	}
 
+	//
 	private boolean checkRGBData(){
-		int iterations = 0;
-		while(iterations <= 10){
-			float[] data = colorSensor.getData();
-			float r = data[0];
-			float g = data[1];
-			float b = data[2];
-			System.out.print("\n\nR: " + r + "\nG: " + g + "\nB: " + b);
+		float[] data = colorSensor.getData();
+		float r = data[0];
+		float g = data[1];
+		float b = data[2];
+		//System.out.print("\n\nR: " + r + "\nG: " + g + "\nB: " + b);
 
-			if(r <= 0.003 && g <= 0.006 && b <= 0.003){
-				return true;
-			}
+		if(r <= 0.003 && g <= 0.006 && b <= 0.003){
+			return true;
 		}
 		return false;
 	}
@@ -89,36 +78,34 @@ public class Washer {
 		startTime = System.currentTimeMillis();
 	}
 
-	private boolean soundDetected(){
-		if(soundSensor.getDB() >= minSoundStrength && getTimeDifference() >= 1500){
-			resetStartTime();
-			return true;
-		}
-		return false;
-	}
+	private void soundDetected(){
+		float soundStrength = soundSensor.getDB()*100;
+		System.out.print("Sound: " + soundStrength);
 
-	private void rotateArm(){
-		NXTRegulatedMotor arm = Motor.C;
-		int angle = 70;
-		int direction = (isArmUp)? 1 : -1;
-		arm.rotate(angle*direction);
-		isArmUp = !isArmUp;
+		if(soundStrength >= minSoundStrength && getTimeDifference() >= 1500){
+			resetStartTime();
+			engine.stop();
+			sleep(6000);
+			engine.moveForward();
+			//return true;
+		}
+		//return false;
 	}
 
 	private void sleep(int time){
-		try{
+		try {
 			Thread.sleep(time);
-		}
-		catch(Exception e){
-			System.out.print("Error:" + e.getMessage ());
+		} 
+		catch(Exception e) {
+			System.out.print("Error:" + e.getMessage());
 		}
 	}
 
 	private void rotate90Degrees (boolean bigRot){
 		Motor.A.forward();
 		Motor.B.backward();
-		float time = (bigRot)? 2350 : 2300;
-		sleep(2300);
+		int time = (bigRot)? 2450 : 2450;
+		sleep(time);
 		bigRot = !bigRot;
 	}
 

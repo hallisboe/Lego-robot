@@ -40,6 +40,8 @@ public class Washer {
 					break;
 				}
 			}
+			engine.moveBackwards ();
+			sleep(1000);
 			rotate90Degrees(bigRot);
 		}
 	}
@@ -86,6 +88,7 @@ public class Washer {
 			resetStartTime();
 			engine.stop();
 			sleep(6000);
+			fixRotation ();
 			engine.moveForward();
 			//return true;
 		}
@@ -107,6 +110,12 @@ public class Washer {
 		int time = (bigRot)? 2450 : 2450;
 		sleep(time);
 		bigRot = !bigRot;
+	}
+
+	private void fixRotation (){
+		Motor.A.forward();
+		Motor.B.backward();
+		sleep(200);
 	}
 
 

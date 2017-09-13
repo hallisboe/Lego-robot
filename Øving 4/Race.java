@@ -8,16 +8,15 @@ import lejos.hardware.motor.*;
 
 class Race {
 	private static ColorSensor colorSensor;
-	private static Engine engine;
 
 	public static void main(String[] args){
-		new Racer();
+		new Race();
 	}
 
 	public Race(){
 		colorSensor = new ColorSensor (SensorPort.S1,0);
 		
-		NXTRegulatedMotor motors = {Motor.A,Motor.B,Motor.C,Motor.D};
+		NXTRegulatedMotor[] motors = {Motor.A,Motor.B,Motor.C,Motor.D};
 		for(NXTRegulatedMotor m : motors){
 			m.setSpeed(900);
 			m.forward ();

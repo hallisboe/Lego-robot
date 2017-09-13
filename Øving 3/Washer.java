@@ -32,17 +32,19 @@ public class Washer {
 
 		boolean bigRot = true;
 
+		Motor.D.forward();
+
 		while(true){
 			engine.moveForward();
 			while(true) {
-				soundDetected ();
-				if(checkRGBData ()){
+				soundDetected();
+				if(checkRGBData()){
 					break;
 				}
 			}
-			engine.moveBackwards ();
+			engine.moveBackwards();
 			sleep(1000);
-			rotate90Degrees(bigRot);
+			rotate180Degrees(bigRot);
 		}
 	}
 
@@ -104,11 +106,10 @@ public class Washer {
 		}
 	}
 
-	private void rotate90Degrees (boolean bigRot){
+	private void rotate180Degrees (boolean bigRot){
 		Motor.A.forward();
 		Motor.B.backward();
-		int time = (bigRot)? 2450 : 2450;
-		sleep(time);
+		sleep(2450);
 		bigRot = !bigRot;
 	}
 
